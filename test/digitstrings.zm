@@ -1,0 +1,7 @@
+
+//Digits displayed in the instruction prior to the first block
+const string DIGITS1 = "1 2 3 4 5";
+//Digits displayed in the instruction prior to the second block
+const string DIGITS2 = "1 2 3 4 5";
+//Digits displayed in the instruction prior to the third block
+const string DIGITS3 = "1 2 3 4 5";
