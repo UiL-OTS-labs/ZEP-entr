@@ -1,2 +1,5 @@
 
+# ignore vim temporaries
+*\.sw[op]
+# ignore the database directory (zep generated and confidential).
 /db
