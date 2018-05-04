@@ -1,0 +1,7 @@
+
+// Instructions presented above the digit strings
+
+const string DIGIT_INSTRUCTIONS =
+   M"Dear participant,\n"
+    "Please try to memorise the digit string below\n\n"
+    ;
