@@ -52,6 +52,7 @@ Block task
         // Randomize tests.
         if (shuffle_test_items() != OK) terminate;
 
+        set_checkin_item_values();
     }
 
     Part instructions1
@@ -200,7 +201,7 @@ Block task
                 output.sndfn = checkin_page.response.value;
                 output.value = -1; // SEEME lr: value/string should be saved here, but it's type mismatch, so it is saved in the sound file name
                 output.rt = checkin_page.response.rt;
-                output.correct = checkin_page.response.correct;
+                output.correct = item.value == checkin_page.response.value;
                 output.atype = -1;
                 test_output_append(output);
             }
@@ -417,7 +418,7 @@ Block task
                 output.sndfn = checkin_page.response.value;
                 output.value = -1; // SEEME lr: value/string should be saved here, but it's type mismatch, so it is saved in the sound file name
                 output.rt = checkin_page.response.rt;
-                output.correct = checkin_page.response.correct;
+                output.correct = item.value == checkin_page.response.value;
                 output.atype = -1;
                 test_output_append(output);
             }
@@ -634,7 +635,7 @@ Block task
                 output.sndfn = checkin_page.response.value;
                 output.value = -1; // SEEME lr: value/string should be saved here, but it's type mismatch, so it is saved in the sound file name
                 output.rt = checkin_page.response.rt;
-                output.correct = checkin_page.response.correct;
+                output.correct = item.value == checkin_page.response.value;
                 output.atype = -1;
                 test_output_append(output);
             }

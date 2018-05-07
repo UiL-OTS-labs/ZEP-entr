@@ -2,6 +2,23 @@
 //Digits displayed in the instruction prior to the first block
 const string DIGITS1 = "1 2 3 4 5";
 //Digits displayed in the instruction prior to the second block
-const string DIGITS2 = "1 2 3 4 5";
+const string DIGITS2 = "2 4 6 8";
 //Digits displayed in the instruction prior to the third block
-const string DIGITS3 = "1 2 3 4 5";
+const string DIGITS3 = "2 3 4 5 1";
+
+
+// Removes white space from a string
+string remove_white_space(string in)
+{
+    string output;
+    int i = 0;
+    while(i < length(in)) {
+        if (is_whitespace(string(character(in,i))))
+            ;
+        else
+            output += character(in, i);
+        i++;
+    }
+
+    return output;
+}
