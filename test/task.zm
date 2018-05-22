@@ -50,7 +50,9 @@ Block task
     on_event:entry()
     {
         // Randomize tests.
-        if (shuffle_test_items() != OK) terminate;
+        if (shuffle_test_items() != OK) {
+            terminate;
+        }
 
         set_checkin_item_values();
     }
@@ -91,12 +93,10 @@ Block task
             train_page.setup(num_cycles);
         }
 
-
         on_event:exit()
         {
             train_page.cleanup();
         }
-
 
         Trial trial
         {
@@ -107,12 +107,12 @@ Block task
                 train_page.action(this, item, reference_time, training1.cycle);
             }
 
-	    on_event:exit()
-	    {
+            on_event:exit()
+            {
                 // Add new row to test output table.
                 TestOutput output;
                 output.step = "training1";
-	        output.grp = selected_group;
+                output.grp = selected_group;
                 output.trial = training1.cycle + 1;
                 output.id = item.id;
                 output.type = item.type;
@@ -122,10 +122,9 @@ Block task
                 output.correct = -1;
                 output.atype = -1;
                 test_output_append(output);
-	    }
+            }
         }
     }
-
 
     Part
     {
@@ -134,7 +133,6 @@ Block task
             blank_page.action_auto(this, 500ms);
         }
     }
-
 
     Part pause1
     {
@@ -147,18 +145,17 @@ Block task
                 "\n"
 //                "<i>Hit Enter when ready to proceed.</i>",
                 "<i>Click the button below when you are ready to start.</i>",
-                true);
+                true
+                );
 
             pause_page.action(this);
             control.button_box.enable_all_buttons(CONTINUE);
         }
     }
 
-
     Block checkin1
     {
         CheckinItem        item;   // current item
-
 
         on_event:entry()
         {
@@ -169,7 +166,6 @@ Block task
             checkin_page.setup(num_cycles, "1");
         }
 
-
         on_event:exit()
         {
             checkin_page.cleanup();
@@ -177,7 +173,6 @@ Block task
             // Save test output table as CSV file.
             test_output_save();
         }
-
 
         Trial trial
         {
@@ -187,7 +182,6 @@ Block task
 
                 checkin_page.action(this, item, reference_time, checkin1.cycle);
             }
-
 
             on_event:exit()
             {
@@ -212,17 +206,15 @@ Block task
     {
         TestItem        item;   // current item
 
-
         on_event:entry()
         {
             num_cycles = test_items[0].size;
-	    test_items[0].shuffle(0, -1);
+            test_items[0].shuffle(0, -1);
 
             // Prepare test page: progress bar enabled, feedback and prompt
             // disabled.
             test_page.setup(num_cycles, "1");
         }
-
 
         on_event:exit()
         {
@@ -231,7 +223,6 @@ Block task
             // Save test output table as CSV file.
             test_output_save();
         }
-
 
         Trial trial
         {
@@ -242,13 +233,12 @@ Block task
                 test_page.action(this, item, reference_time, test1.cycle);
             }
 
-
             on_event:exit()
             {
                 // Add new row to test output table.
                 TestOutput output;
                 output.step = "test1";
-		output.grp = selected_group;
+                output.grp = selected_group;
                 output.trial = test1.cycle + 1;
                 output.id = item.id;
                 output.type = item.type;
@@ -261,7 +251,6 @@ Block task
             }
         }
     }
-
 
     Part
     {
@@ -294,7 +283,6 @@ Block task
         }
     }
 
-
     Block training2
     {
         TestItem        item;   // current item
@@ -302,18 +290,16 @@ Block task
         on_event:entry()
         {
             num_cycles = train_items[selected_group].size;
-	    train_items[selected_group].shuffle(0, -1);
+            train_items[selected_group].shuffle(0, -1);
 
             // Prepare test page: progress bar, feedback and prompt enabled.
             train_page.setup(num_cycles);
         }
 
-
         on_event:exit()
         {
             train_page.cleanup();
         }
-
 
         Trial trial
         {
@@ -324,12 +310,12 @@ Block task
                 train_page.action(this, item, reference_time, training2.cycle);
             }
 
-	    on_event:exit()
-	    {
+            on_event:exit()
+            {
                 // Add new row to test output table.
                 TestOutput output;
                 output.step = "training2";
-	        output.grp = selected_group;
+                output.grp = selected_group;
                 output.trial = training2.cycle + 1;
                 output.id = item.id;
                 output.type = item.type;
@@ -339,10 +325,9 @@ Block task
                 output.correct = -1;
                 output.atype = -1;
                 test_output_append(output);
-	    }
+            }
         }
     }
-
 
     Part
     {
@@ -351,7 +336,6 @@ Block task
             blank_page.action_auto(this, 500ms);
         }
     }
-
 
     Part pause2
     {
@@ -371,11 +355,9 @@ Block task
         }
     }
 
-
     Block checkin2
     {
         CheckinItem        item;   // current item
-
 
         on_event:entry()
         {
@@ -386,7 +368,6 @@ Block task
             checkin_page.setup(num_cycles, "1");
         }
 
-
         on_event:exit()
         {
             checkin_page.cleanup();
@@ -394,7 +375,6 @@ Block task
             // Save test output table as CSV file.
             test_output_save();
         }
-
 
         Trial trial
         {
@@ -404,7 +384,6 @@ Block task
 
                 checkin_page.action(this, item, reference_time, checkin2.cycle);
             }
-
 
             on_event:exit()
             {
@@ -425,22 +404,19 @@ Block task
         }
     }
 
-
     Block test2
     {
         TestItem        item;   // current item
 
-
         on_event:entry()
         {
             num_cycles = test_items[1].size;
-	    test_items[1].shuffle(0, -1);
+            test_items[1].shuffle(0, -1);
 
             // Prepare test page: progress bar enabled, feedback and prompt
             // disabled.
             test_page.setup(num_cycles, "2");
         }
-
 
         on_event:exit()
         {
@@ -449,7 +425,6 @@ Block task
             // Save test output table as CSV file.
             test_output_save();
         }
-
 
         Trial trial
         {
@@ -460,13 +435,12 @@ Block task
                 test_page.action(this, item, reference_time, test2.cycle);
             }
 
-
             on_event:exit()
             {
                 // Add new row to test output table.
                 TestOutput output;
                 output.step = "test2";
-		output.grp = selected_group;
+                output.grp = selected_group;
                 output.trial = test2.cycle + 1;
                 output.id = item.id;
                 output.type = item.type;
@@ -479,7 +453,6 @@ Block task
             }
         }
     }
-
 
     Part
     {
@@ -519,18 +492,16 @@ Block task
         on_event:entry()
         {
             num_cycles = train_items[selected_group].size;
-	    train_items[selected_group].shuffle(0, -1);
+            train_items[selected_group].shuffle(0, -1);
 
             // Prepare test page: progress bar, feedback and prompt enabled.
             train_page.setup(num_cycles);
         }
 
-
         on_event:exit()
         {
             train_page.cleanup();
         }
-
 
         Trial trial
         {
@@ -541,12 +512,12 @@ Block task
                 train_page.action(this, item, reference_time, training3.cycle);
             }
 
-	    on_event:exit()
-	    {
+            on_event:exit()
+            {
                 // Add new row to test output table.
                 TestOutput output;
                 output.step = "training3";
-	        output.grp = selected_group;
+                output.grp = selected_group;
                 output.trial = training3.cycle + 1;
                 output.id = item.id;
                 output.type = item.type;
@@ -556,10 +527,9 @@ Block task
                 output.correct = -1;
                 output.atype = -1;
                 test_output_append(output);
-	    }
+            }
         }
     }
-
 
     Part
     {
@@ -568,7 +538,6 @@ Block task
             blank_page.action_auto(this, 500ms);
         }
     }
-
 
     Part pause3
     {
@@ -588,11 +557,9 @@ Block task
         }
     }
 
-
     Block checkin3
     {
         CheckinItem        item;   // current item
-
 
         on_event:entry()
         {
@@ -603,7 +570,6 @@ Block task
             checkin_page.setup(num_cycles, "1");
         }
 
-
         on_event:exit()
         {
             checkin_page.cleanup();
@@ -611,7 +577,6 @@ Block task
             // Save test output table as CSV file.
             test_output_save();
         }
-
 
         Trial trial
         {
@@ -621,7 +586,6 @@ Block task
 
                 checkin_page.action(this, item, reference_time, checkin3.cycle);
             }
-
 
             on_event:exit()
             {
@@ -642,22 +606,19 @@ Block task
         }
     }
 
-
     Block test3
     {
         TestItem        item;   // current item
 
-
         on_event:entry()
         {
             num_cycles = test_items[2].size;
-	    test_items[2].shuffle(0, -1);
+            test_items[2].shuffle(0, -1);
 
             // Prepare test page: progress bar enabled, feedback and prompt
             // disabled.
             test_page.setup(num_cycles, "3");
         }
-
 
         on_event:exit()
         {
@@ -666,7 +627,6 @@ Block task
             // Save test output table as CSV file.
             test_output_save();
         }
-
 
         Trial trial
         {
@@ -677,13 +637,12 @@ Block task
                 test_page.action(this, item, reference_time, test3.cycle);
             }
 
-
             on_event:exit()
             {
                 // Add new row to test output table.
                 TestOutput output;
                 output.step = "test3";
-		output.grp = selected_group;
+                output.grp = selected_group;
                 output.trial = test3.cycle + 1;
                 output.id = item.id;
                 output.type = item.type;
@@ -697,7 +656,6 @@ Block task
         }
     }
 
-
     Part
     {
         on_event:entry()
@@ -705,7 +663,6 @@ Block task
             blank_page.action_auto(this, 500ms);
         }
     }
-
 
     Part pause4
     {
@@ -716,29 +673,27 @@ Block task
                 "\n"
 //                "<i>Hit Enter when ready to proceed.</i>",
                 "<i>Click the button below when you are ready to start.</i>",
-                true);
+                true
+                );
 
             pause_page.action(this);
             control.button_box.enable_all_buttons(CONTINUE);
         }
     }
 
-
     Block test4
     {
         TestItem        item;   // current item
 
-
         on_event:entry()
         {
             num_cycles = test_items[3].size;
-	    test_items[3].shuffle(0, -1);
+            test_items[3].shuffle(0, -1);
 
             // Prepare test page: progress bar enabled, feedback and prompt
             // disabled.
             test_page.setup(num_cycles, "4", 0, test_items[4].size);
         }
-
 
         on_event:exit()
         {
@@ -747,7 +702,6 @@ Block task
             // Save test output table as CSV file.
             test_output_save();
         }
-
 
         Trial trial
         {
@@ -758,13 +712,12 @@ Block task
                 test_page.action(this, item, reference_time, test4.cycle);
             }
 
-
             on_event:exit()
             {
                 // Add new row to test output table.
                 TestOutput output;
                 output.step = "test4";
-		output.grp = selected_group;
+                output.grp = selected_group;
                 output.trial = test4.cycle + 1;
                 output.id = item.id;
                 output.type = item.type;
@@ -778,22 +731,19 @@ Block task
         }
     }
 
-
     Block test5
     {
         TestItem        item;   // current item
 
-
         on_event:entry()
         {
             num_cycles = test_items[4].size;
-	    test_items[4].shuffle(0, -1);
+            test_items[4].shuffle(0, -1);
 
             // Prepare test page: progress bar enabled, feedback and prompt
             // disabled.
             test_page.setup(num_cycles, "5", test_items[3].size, test_items[3].size);
         }
-
 
         on_event:exit()
         {
@@ -802,7 +752,6 @@ Block task
             // Save test output table as CSV file.
             test_output_save();
         }
-
 
         Trial trial
         {
@@ -813,13 +762,12 @@ Block task
                 test_page.action(this, item, reference_time, test5.cycle);
             }
 
-
             on_event:exit()
             {
                 // Add new row to test output table.
                 TestOutput output;
                 output.step = "test5";
-		output.grp = selected_group;
+                output.grp = selected_group;
                 output.trial = test5.cycle + 1;
                 output.id = item.id;
                 output.type = item.type;
@@ -833,7 +781,6 @@ Block task
         }
     }
 
-
     Part
     {
         on_event:entry()
@@ -842,7 +789,6 @@ Block task
         }
     }
 }
-
 
 void action(Part caller)
 {
