@@ -23,12 +23,10 @@ Page train_page
     TestItem    item;           // trial control parameters
     int 	ntrials;
 
-
     init()
     {
         fill_pattern_color = TEST_PAGE_COLOR;
     }
-
 
     on_event:key_press()
     {
@@ -46,7 +44,6 @@ Page train_page
             height = 0;     // 0 means as large as possible
         }
 
-
         CanvasGadget canvas
         {
             init()
@@ -56,7 +53,6 @@ Page train_page
                 offset_x = width / 2;
                 offset_y = height / 2;
             }
-
 
             CrossShape fixation
             {
@@ -78,22 +74,18 @@ Page train_page
             return canvas.fixation.expected_finish_time;
         }
 
-
         void reset()
         {
             full_abort();
         }
     }
 
-
     SoundChain stimulus
     {
 
         SoundFile clip {}
 
-
         SoundPlayback playback {}
-
 
         time play(time t)
         {
@@ -113,7 +105,6 @@ Page train_page
         }
     }
 
-
     // Aborts any ongoing activity on this page and signals the initiator
     // of the trial that we're done.
     void done(int msgid)
@@ -128,15 +119,13 @@ Page train_page
         control.clear_status();
     }
 
-
     //==========================================================================
-
 
     // Performs preparatory work required before using this page.
     void setup(int ntrials=-1)
     {
         test_page_overlay.setup(this);
-	this.ntrials = ntrials;
+        this.ntrials = ntrials;
 
         // Show item number
         test_page_overlay.show_prompt("" + ntrials + " items", true);
@@ -147,13 +136,11 @@ Page train_page
         control.clear_status();
     }
 
-
     // Performs cleaning up if necessary.
     void cleanup()
     {
         test_page_overlay.cleanup();
     }
-
 
     // Starts a trial.
     void action(Object caller, TestItem it, time tref, int count=-1)
@@ -161,10 +148,8 @@ Page train_page
         // Save the passed trial control parameters.
         item = it;
 
-
         // Show this page (if not yet done) and make tref the trial start time.
         tref = test_window1.show_test_page(this, tref + INTERTRIAL_INTERVAL);
-
 
         // Start fixation symbol.
         time fixoffset = layout.start_fixation(tref);
@@ -179,13 +164,13 @@ Page train_page
         // test_page_overlay.update_progress_bar(count);
 
         // Update status line on control window. Cleared in done() above.
-	string status = "TRAIN " + ": " +
+        string status = "TRAIN " + ": " +
                         string(item.id) + "  " +
                         string(item.type) + "  " +
                         string(item.sndfn);
 
         control.set_status(status);
-	println(status);
+        println(status);
 
         // Remember who to signal when the trial is over.
         target = caller;
@@ -202,25 +187,21 @@ Page test_page
     string	question;
     dur		question_only_dur;
 
-
     init()
     {
         fill_pattern_color = TEST_PAGE_COLOR;
-	this.set_question(EXPERIMENT_TEST_QUESTION);
+        this.set_question(EXPERIMENT_TEST_QUESTION);
     }
-
 
     void set_question(string q)
     {
     	this.question = q;
     }
 
-
     void set_question_only_duration(dur d=QUESTION_ALONE_DURATION)
     {
     	this.question_only_dur = d;
     }
-
 
     on_event:key_press()
     {
@@ -233,13 +214,11 @@ Page test_page
             handle_special_key(this, input_key, input_modifiers);
     }
 
-
     on_event:message()
     {
         // Process button-box message. See setup() below.
         response.process_hit(message_arg, event_time);
     }
-
 
     VerticalLayout layout
     {
@@ -248,7 +227,6 @@ Page test_page
             spacing = 50;
             height = 0;     // 0 means as large as possible
         }
-
 
         CanvasGadget canvas
         {
@@ -259,7 +237,6 @@ Page test_page
                 offset_x = width / 2;
                 offset_y = height / 2;
             }
-
 
             CrossShape fixation
             {
@@ -281,7 +258,6 @@ Page test_page
                 options = LAYOUT_EQUAL_WIDTH;
             }
 
-
             ButtonGadget button1
             {
                 init()
@@ -294,13 +270,11 @@ Page test_page
                     size = 150, 75;
                 }
 
-
                 on_event:activate()
                 {
                     response.process_hit(1, event_time);
                 }
             }
-
 
             ButtonGadget button2
             {
@@ -314,14 +288,12 @@ Page test_page
                     size = 150, 75;
                 }
 
-
                 on_event:activate()
                 {
                     response.process_hit(0, event_time);
                 }
             }
         }
-
 
         time start_fixation(time t)
         {
@@ -331,7 +303,6 @@ Page test_page
             // Return fixation offset time.
             return canvas.fixation.expected_finish_time;
         }
-
 
         void reset()
         {
@@ -345,10 +316,8 @@ Page test_page
         // Sound source/producer object.
         SoundFile clip {}
 
-
         // Sound sink/consumer object.
         SoundPlayback playback {}
-
 
         time play(time t)
         {
@@ -363,7 +332,6 @@ Page test_page
         }
     }
 
-
     Response response
     {
         // Response data.
@@ -373,7 +341,6 @@ Page test_page
         int     atype;
         int     isXXY;
 
-
         void clear()
         {
             value = -1;
@@ -382,7 +349,6 @@ Page test_page
             atype = -1;
             isXXY = 0;
         }
-
 
         void process_hit(int val, time t)
         {
@@ -421,8 +387,6 @@ Page test_page
             }
         }
 
-
-
         on_event:finish()
         {
             real correctness = 0;
@@ -433,13 +397,11 @@ Page test_page
                 done(CONTINUE);
         }
 
-
         on_event:message()
         {
             done(CONTINUE);
         }
     }
-
 
     // Aborts any ongoing activity on this page and signals the initiator
     // of the trial that we're done.
@@ -455,9 +417,7 @@ Page test_page
         control.clear_status();
     }
 
-
     //==========================================================================
-
 
     // Performs preparatory work required before using this page.
     void setup(int ntrials=-1, string test_no="", int count_offset=0, int total_offset=0)
@@ -473,7 +433,8 @@ Page test_page
         test_page_overlay.show_prompt("" + (this.total_offset + this.ntrials) + " items", true);
 
         // Enable or disable the progress bar.
-        // test_page_overlay.show_progress_bar(this.total_offset + this.ntrials);   // disabled if < 0
+        // test_page_overlay.show_progress_bar(this.total_offset + this.ntrials);
+        // disabled if < 0
 
         // Enable button-box buttons 0 and 1 for resp. yes(0) and no(1).
         control.target = this;
@@ -482,7 +443,6 @@ Page test_page
         // button 1 is unused (button down)
         control.button_box.enable_button(2, 0); // button 2 means no(0)
     }
-
 
     // Performs cleaning up if necessary.
     void cleanup()
@@ -493,30 +453,30 @@ Page test_page
         control.target = null;
     }
 
-
     // Starts a trial.
     void action(Object caller, TestItem it, time tref, int count=-1)
     {
         // Save the passed trial control parameters.
         item = it;
 
-
         // Show this page (if not yet done) and make tref the trial start time.
         tref = test_window1.show_test_page(this, tref + INTERTRIAL_INTERVAL);
 
-
         // Reset response data.
         response.clear();
-
 
         // Start fixation symbol.
         time fixoffset = layout.start_fixation(tref);
 
         // Show item number
-        test_page_overlay.show_prompt(this.question + "\n\n" + (this.count_offset + count + 1) + " / " +
-				      (this.total_offset + this.ntrials), true);
+        test_page_overlay.show_prompt(
+                this.question + "\n\n" +
+                (this.count_offset + count + 1) + " / " +
+				(this.total_offset + this.ntrials),
+                true
+                );
 
-	    fixoffset += (count == 0 && this.count_offset == 0 ? this.question_only_dur : 0ms);
+	    fixoffset += (count == 0 && this.count_offset == 0)? this.question_only_dur : 0ms;
         // Start stimulus at fixation offset.
         time stimonset = stimulus.play(fixoffset);
 
@@ -551,19 +511,16 @@ Page checkin_page
     string	question;
     dur		question_only_dur;
 
-
     init()
     {
         fill_pattern_color = TEST_PAGE_COLOR;
 	    this.set_question(EXPERIMENT_TEST_QUESTION);
     }
 
-
     void set_question(string q)
     {
     	this.question = q;
     }
-
 
     void set_question_only_duration(dur d=QUESTION_ALONE_DURATION)
     {
@@ -578,7 +535,6 @@ Page checkin_page
             height = 0;     // 0 means as large as possible
         }
 
-
         CanvasGadget canvas
         {
             init()
@@ -588,7 +544,6 @@ Page checkin_page
                 offset_x = width / 2;
                 offset_y = height / 2;
             }
-
 
             CrossShape fixation
             {
@@ -601,7 +556,6 @@ Page checkin_page
             }
         }
 
-
         time start_fixation(time t)
         {
             // Start fixation cross.
@@ -610,7 +564,6 @@ Page checkin_page
             // Return fixation offset time.
             return canvas.fixation.expected_finish_time;
         }
-
         
         TextFieldGadget input
         {
@@ -641,7 +594,6 @@ Page checkin_page
                 is_visible = false;
             }
 
-
             ButtonGadget button1
             {
                 init()
@@ -653,7 +605,6 @@ Page checkin_page
                     text_color = TEST_PAGE_BUTTON_TEXT_COLOR;
                     size = 75, 75;
                 }
-
 
                 on_event:activate()
                 {
@@ -673,7 +624,6 @@ Page checkin_page
                     size = 75, 75;
                 }
 
-
                 on_event:activate()
                 {
                     input.set_text(input.text + "2");
@@ -691,7 +641,6 @@ Page checkin_page
                     text_color = TEST_PAGE_BUTTON_TEXT_COLOR;
                     size = 75, 75;
                 }
-
 
                 on_event:activate()
                 {
@@ -711,7 +660,6 @@ Page checkin_page
                     size = 75, 75;
                 }
 
-
                 on_event:activate()
                 {
                     input.set_text(input.text + "4");
@@ -729,7 +677,6 @@ Page checkin_page
                     text_color = TEST_PAGE_BUTTON_TEXT_COLOR;
                     size = 75, 75;
                 }
-
 
                 on_event:activate()
                 {
@@ -749,7 +696,6 @@ Page checkin_page
                     size = 75, 75;
                 }
 
-
                 on_event:activate()
                 {
                     input.set_text(input.text + "6");
@@ -767,7 +713,6 @@ Page checkin_page
                     text_color = TEST_PAGE_BUTTON_TEXT_COLOR;
                     size = 75, 75;
                 }
-
 
                 on_event:activate()
                 {
@@ -787,7 +732,6 @@ Page checkin_page
                     size = 75, 75;
                 }
 
-
                 on_event:activate()
                 {
                     input.set_text(input.text + "8");
@@ -805,7 +749,6 @@ Page checkin_page
                     text_color = TEST_PAGE_BUTTON_TEXT_COLOR;
                     size = 75, 75;
                 }
-
 
                 on_event:activate()
                 {
@@ -825,7 +768,6 @@ Page checkin_page
                     size = 75, 75;
                 }
 
-
                 on_event:activate()
                 {
                     input.set_text(input.text + "0");
@@ -843,7 +785,6 @@ Page checkin_page
                     text_color = TEST_PAGE_BUTTON_TEXT_COLOR;
                     size = 180, 75;
                 }
-
 
                 on_event:activate()
                 {
@@ -863,7 +804,6 @@ Page checkin_page
                     size = 75, 75;
                 }
 
-
                 on_event:activate()
                 {
                     if (text != "")
@@ -872,22 +812,18 @@ Page checkin_page
             }
         }
 
-
         void reset()
         {
             full_abort();
             input.text = "";
         }
     }
-
-
     Response response
     {
         // Response data.
-        string     value;          // response value: 0=no, 1=yes, -1=timeout
-        int     rt;             // response time [ms]
-        int     correct;        // correct response: 0=no, 1=yes, -1=n.a.
-
+        string      value;          // response value: 0=no, 1=yes, -1=timeout
+        int         rt;             // response time [ms]
+        int         correct;        // correct response: 0=no, 1=yes, -1=n.a.
 
         void clear()
         {
@@ -896,12 +832,9 @@ Page checkin_page
             correct = -1;
         }
 
-
         void process_hit(string val, time t)
         {
             HitType validity = hit(t);
-
-
 
             // Accept the first hit in the response interval and end the
             // response interval.
@@ -920,20 +853,16 @@ Page checkin_page
             }
         }
 
-
         on_event:message()
         {
             done(CONTINUE);
         }
-
-        
         
         on_event:start()
         {
             layout.input.is_visible = true;
             layout.buttons.is_visible = true;
         }
-
 
         on_event:finish()
         {
@@ -944,12 +873,12 @@ Page checkin_page
             if (num_valid_hits > 0) correctness = correct ? 1 : -1;
 
             if (!test_page_overlay.start_feedback(this, correctness,
-                    FEEDBACK_DURATION))
+                    FEEDBACK_DURATION)
+                ) {
                 done(CONTINUE);
+            }
         }
-
     }
-
 
     // Aborts any ongoing activity on this page and signals the initiator
     // of the trial that we're done.
@@ -965,9 +894,7 @@ Page checkin_page
         control.clear_status();
     }
 
-
     //==========================================================================
-
 
     // Performs preparatory work required before using this page.
     void setup(int ntrials=-1, string test_no="", int count_offset=0, int total_offset=0)
@@ -995,7 +922,6 @@ Page checkin_page
         control.button_box.enable_button(2, 0); // button 2 means no(0)
     }
 
-
     // Performs cleaning up if necessary.
     void cleanup()
     {
@@ -1005,22 +931,18 @@ Page checkin_page
         control.target = null;
     }
 
-
     // Starts a trial.
     void action(Object caller, CheckinItem it, time tref, int count=-1)
     {
         // Save the passed trial control parameters.
         item = it;
 
-
         // Show this page (if not yet done) and make tref the trial start time.
         // tref = test_window1.show_test_page(this, tref + INTERTRIAL_INTERVAL);
         tref = test_window1.show_test_page(this, tref);
 
-
         // Reset response data.
         response.clear();
-
 
         // Start fixation symbol.
         time fixoffset = layout.start_fixation(tref);
