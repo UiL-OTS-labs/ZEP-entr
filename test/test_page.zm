@@ -906,15 +906,9 @@ Page checkin_page
         this.total_offset = total_offset;
         this.set_question_only_duration();
 
-        // Show or hide prompt.
-        //test_page_overlay.show_prompt("" + (this.total_offset + this.ntrials) + " items", true);
-
         test_page_overlay.setup(this);
 
-        // Enable or disable the progress bar.
-        // test_page_overlay.show_progress_bar(this.total_offset + this.ntrials);   // disabled if < 0
-
-        // Enable button-box buttons 0 and 1 for resp. yes(0) and no(1).
+        // Enable button-box buttons 0 and 2 for resp. yes(0) and no(1).
         control.target = this;
         control.button_box.disable_buttons();
        	control.button_box.enable_button(0, 1); // button 0 means yes(1)
@@ -938,7 +932,6 @@ Page checkin_page
         item = it;
 
         // Show this page (if not yet done) and make tref the trial start time.
-        // tref = test_window1.show_test_page(this, tref + INTERTRIAL_INTERVAL);
         tref = test_window1.show_test_page(this, tref);
 
         // Reset response data.
@@ -947,20 +940,11 @@ Page checkin_page
         // Start fixation symbol.
         time fixoffset = layout.start_fixation(tref);
 
-        // Show item number
-        //test_page_overlay.show_prompt(this.question + "\n\n" + (this.count_offset + count + 1) + " / " +
-		//		      (this.total_offset + this.ntrials), true);
-
 	    fixoffset += (count == 0 && this.count_offset == 0 ? this.question_only_dur : 0ms);
-        // Start stimulus at fixation offset.
-        //time stimonset = stimulus.play(fixoffset);
 
         // Response interval starts at stimulus onset. Timeout after
         // RESPONSE_DURATION unless this duration is 0s or less.
         response.start(fixoffset, RESPONSE_DURATION);
-
-        // Update progress counter (if enabled).
-        // test_page_overlay.update_progress_bar(this.count_offset + count);
 
         // Update status line on control window. Cleared in done() above.
 	    string status = "CHECKIN " + this.test_no + ": " +
