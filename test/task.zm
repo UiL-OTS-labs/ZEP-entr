@@ -42,6 +42,7 @@ import output;
 import test_page;
 import global_texts;
 import digitstrings;
+import digit_page;
 import instructions;
 
 
