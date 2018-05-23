@@ -3,5 +3,6 @@
 
 const string DIGIT_INSTRUCTIONS =
    M"Dear participant,\n"
-    "Please try to memorise the digit string below\n\n"
+    "Please try to memorize the digits then listen to the other sounds "
+    "That follow, while you retain the digits in your memory."
     ;

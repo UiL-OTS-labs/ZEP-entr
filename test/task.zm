@@ -63,21 +63,24 @@ Block task
         on_event:entry()
         {
             pause_page.set_text_size(1000, 600);
-            pause_page.set_text(
-                DIGIT_INSTRUCTIONS  + DIGITS1,
-                true
-                );
-
+            pause_page.set_text(DIGIT_INSTRUCTIONS, true);
             pause_page.action(this);
             control.button_box.enable_all_buttons(CONTINUE);
         }
     }
-    
-    Part
+
+    Part digits1
     {
         on_event:entry()
         {
-            blank_page.action_auto(this, 500ms);
+            // blank_page.action_auto(this, 500ms);
+            digit_page.setup(true);
+            digit_page.action(this, remove_white_space(DIGITS1), reference_time);
+        }
+
+        on_event:exit()
+        {
+            digit_page.cleanup();
         }
     }
 
@@ -266,21 +269,24 @@ Block task
         on_event:entry()
         {
             pause_page.set_text_size(1000, 600);
-            pause_page.set_text(
-                DIGIT_INSTRUCTIONS  + DIGITS2,
-                true
-                );
+            pause_page.set_text(DIGIT_INSTRUCTIONS, true);
 
             pause_page.action(this);
             control.button_box.enable_all_buttons(CONTINUE);
         }
     }
-    
-    Part
+
+    Part digits2
     {
         on_event:entry()
         {
-            blank_page.action_auto(this, 500ms);
+            digit_page.setup(true);
+            digit_page.action(this, remove_white_space(DIGITS2), reference_time);
+        }
+
+        on_event:exit()
+        {
+            digit_page.cleanup();
         }
     }
 
@@ -469,7 +475,7 @@ Block task
         {
             pause_page.set_text_size(1000, 600);
             pause_page.set_text(
-                DIGIT_INSTRUCTIONS  + DIGITS3,
+                DIGIT_INSTRUCTIONS,
                 true
                 );
 
@@ -477,15 +483,22 @@ Block task
             control.button_box.enable_all_buttons(CONTINUE);
         }
     }
-    
-    Part
+
+    Part digits3
     {
         on_event:entry()
         {
-            blank_page.action_auto(this, 500ms);
+            // blank_page.action_auto(this, 500ms);
+            digit_page.setup(true);
+            digit_page.action(this, remove_white_space(DIGITS3), reference_time);
+        }
+
+        on_event:exit()
+        {
+            digit_page.cleanup();
         }
     }
-
+    
     Block training3
     {
         TestItem        item;   // current item

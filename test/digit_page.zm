@@ -71,14 +71,6 @@ Page digit_page
             nth_stimulus = 0;
         }
 
-        void sound(string digit)
-        {
-            string sndfn = digit + ".wav";
-            stim.clip.file = stimuli_dir() + DIGIT_DIR + sndfn;
-            stim.playback.device = sound_output_device;
-            stim.start();
-        }
-
         void start_stimulus(time starttime)
         {
             if (nth_stimulus >= digit_stimuli.size || nth_stimulus < 0) {
@@ -92,6 +84,8 @@ Page digit_page
                         digit_stimuli[nth_stimulus]+ ".wav";
             stim.clip.file = fn;
             stim.playback.device = sound_output_device;
+
+            start(starttime);
         }
 
 
@@ -100,7 +94,7 @@ Page digit_page
         {
             nth_stimulus++;
             if (nth_stimulus < digit_stimuli.size) {
-                start(finish_time + DIGIT_ISI);
+                start_stimulus(finish_time + DIGIT_ISI);
             }
             else {
                 done(CONTINUE);
@@ -122,23 +116,18 @@ Page digit_page
     }
 
     // Performs preparatory work required before using this page.
-    void setup(
-            int     ntrials      = -1,
-            bool    fb           = false,
-            bool    pr           = false,
-            string  overlay_text = "type in digits in given order"
-            )
+    void setup(bool pr, string pr_text="Remember the digit order")
     {
         test_page_overlay.setup(this);
+
         // Show or hide prompt.
-        test_page_overlay.show_prompt(pr ?
-             overlay_text : "");
+        test_page_overlay.show_prompt(pr ? pr_text : "");
 
         // Enable or disable the progress bar.
-        test_page_overlay.show_progress_bar(ntrials);   // disabled if < 0
+        test_page_overlay.show_progress_bar(-1);   // disabled if < 0
 
         // Enable or disable feedback.
-        test_page_overlay.enable_feedback(fb);          // disabled if false
+        test_page_overlay.enable_feedback(false);          // disabled if false
     }
 
     // Performs cleaning up if necessary.
@@ -155,6 +144,8 @@ Page digit_page
         tref = test_window1.show_test_page(this, tref + INTERTRIAL_INTERVAL);
 
         stim.clear();
+
+        init_digits(digits);
 
         // Start the auditory stimulus.
         stim.start_stimulus(tref);
