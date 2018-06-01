@@ -535,6 +535,19 @@ Page checkin_page
             height = 0;     // 0 means as large as possible
         }
 
+        LabelGadget prompt
+        {
+            on_event:init()
+            {
+                font_family = TEST_PAGE_INPUT_FONT_FAMILY;
+                font_size = TEST_PAGE_INPUT_FONT_SIZE;
+                fill_pattern_color = TEST_PAGE_INPUT_COLOR;
+                text_color = TEST_PAGE_INPUT_TEXT_COLOR;
+
+                text = "Fill out the numbers like you heard before.";
+            }
+        }
+
         CanvasGadget canvas
         {
             init()
