@@ -58,17 +58,6 @@ Block task
         set_checkin_item_values();
     }
 
-    Part instructions1
-    {
-        on_event:entry()
-        {
-            pause_page.set_text_size(1000, 600);
-            pause_page.set_text(DIGIT_INSTRUCTIONS, true);
-            pause_page.action(this);
-            control.button_box.enable_all_buttons(CONTINUE);
-        }
-    }
-
     Part digits1
     {
         on_event:entry()
@@ -138,24 +127,24 @@ Block task
         }
     }
 
-    Part pause1
-    {
-        on_event:entry()
-        {
-            pause_page.set_text(
-                "Dat was het voor deze fase.\n"
-                "\n"
-                "Please use the mouse to enter the numbers you remembered in the same order.\n"
-                "\n"
-//                "<i>Hit Enter when ready to proceed.</i>",
-                "<i>Click the button below when you are ready to start.</i>",
-                true
-                );
-
-            pause_page.action(this);
-            control.button_box.enable_all_buttons(CONTINUE);
-        }
-    }
+//    Part pause1
+//    {
+//        on_event:entry()
+//        {
+//            pause_page.set_text(
+//                "Dat was het voor deze fase.\n"
+//                "\n"
+//                "Please use the mouse to enter the numbers you remembered in the same order.\n"
+//                "\n"
+////                "<i>Hit Enter when ready to proceed.</i>",
+//                "<i>Click the button below when you are ready to start.</i>",
+//                true
+//                );
+//
+//            pause_page.action(this);
+//            control.button_box.enable_all_buttons(CONTINUE);
+//        }
+//    }
 
     Block checkin1
     {
@@ -264,18 +253,6 @@ Block task
         }
     }
 
-    Part instructions2
-    {
-        on_event:entry()
-        {
-            pause_page.set_text_size(1000, 600);
-            pause_page.set_text(DIGIT_INSTRUCTIONS, true);
-
-            pause_page.action(this);
-            control.button_box.enable_all_buttons(CONTINUE);
-        }
-    }
-
     Part digits2
     {
         on_event:entry()
@@ -344,23 +321,23 @@ Block task
         }
     }
 
-    Part pause2
-    {
-        on_event:entry()
-        {
-            pause_page.set_text(
-                "Dat was het voor deze fase.\n"
-                "\n"
-                "Please use the mouse to enter the numbers you remembered in the same order.\n"
-                "\n"
-//                "<i>Hit Enter when ready to proceed.</i>",
-                "<i>Click the button below when you are ready to start.</i>",
-                true);
-
-            pause_page.action(this);
-            control.button_box.enable_all_buttons(CONTINUE);
-        }
-    }
+//    Part pause2
+//    {
+//        on_event:entry()
+//        {
+//            pause_page.set_text(
+//                "Dat was het voor deze fase.\n"
+//                "\n"
+//                "Please use the mouse to enter the numbers you remembered in the same order.\n"
+//                "\n"
+////                "<i>Hit Enter when ready to proceed.</i>",
+//                "<i>Click the button below when you are ready to start.</i>",
+//                true);
+//
+//            pause_page.action(this);
+//            control.button_box.enable_all_buttons(CONTINUE);
+//        }
+//    }
 
     Block checkin2
     {
@@ -469,21 +446,6 @@ Block task
         }
     }
 
-    Part instructions3
-    {
-        on_event:entry()
-        {
-            pause_page.set_text_size(1000, 600);
-            pause_page.set_text(
-                DIGIT_INSTRUCTIONS,
-                true
-                );
-
-            pause_page.action(this);
-            control.button_box.enable_all_buttons(CONTINUE);
-        }
-    }
-
     Part digits3
     {
         on_event:entry()
@@ -553,23 +515,23 @@ Block task
         }
     }
 
-    Part pause3
-    {
-        on_event:entry()
-        {
-            pause_page.set_text(
-                "Dat was het voor deze fase.\n"
-                "\n"
-                "Please use the mouse to enter the numbers you remembered in the same order.\n"
-                "\n"
-//                "<i>Hit Enter when ready to proceed.</i>",
-                "<i>Click the button below when you are ready to start.</i>",
-                true);
-
-            pause_page.action(this);
-            control.button_box.enable_all_buttons(CONTINUE);
-        }
-    }
+//    Part pause3
+//    {
+//        on_event:entry()
+//        {
+//            pause_page.set_text(
+//                "Dat was het voor deze fase.\n"
+//                "\n"
+//                "Please use the mouse to enter the numbers you remembered in the same order.\n"
+//                "\n"
+////                "<i>Hit Enter when ready to proceed.</i>",
+//                "<i>Click the button below when you are ready to start.</i>",
+//                true);
+//
+//            pause_page.action(this);
+//            control.button_box.enable_all_buttons(CONTINUE);
+//        }
+//    }
 
     Block checkin3
     {

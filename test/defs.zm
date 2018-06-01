@@ -32,5 +32,5 @@ const dur       QUESTION_ALONE_DURATION 	    = 3000ms;
 const dur       RESPONSE_DURATION               = 0ms;          // self-paced
 
 // Amount of time between digit in for the digitspan
-const dur       DIGIT_ISI                       = 250ms;
+const dur       DIGIT_ISI                       = 1000ms;
 
